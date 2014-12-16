@@ -10,15 +10,33 @@
 <body>
 
 <h1 class=""><i class="ui home icon"></i>邀請函</h1>
-
+<div id="msg"></div>
+<div id="agenda"></div>
 </body>
 
 <script type="text/javascript" src="../Public/js/vendor/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="../Public/js/vendor/semantic-ui/dist/semantic.min.js"></script>
-<script type="text/javascript" src="https://spreadsheets.google.com/feeds/list/1qoMoqsqgnOgwE2mFSMQ2B89o8sKhKO5BhQ4h_QNUx8c/od6/public/values?alt=json-in-script&callback=JSON_CALLBACK"></script>
+<script type="text/javascript" src="https://spreadsheets.google.com/feeds/list/1qoMoqsqgnOgwE2mFSMQ2B89o8sKhKO5BhQ4h_QNUx8c/od6/public/values?alt=json-in-script&callback=JSN"></script>
 <script type="text/javascript">
 $(function(){
-    alert("sdfdsaf");
+    $("#msg").html("test....");
 });
+
+function JSN(root) {
+    var feed = root.feed;
+    var entries = feed.entry || [];
+    var html = ['<ul>'];
+
+    for (var i = 0; i < entries.length; ++i) {
+      var entry = entries[i];
+      var title = (entry.title.type == 'html') ? entry.title.$t : escape(entry.title.$t);
+      var start = (entry['gd$when']) ? entry['gd$when'][0].startTime : "";	
+
+      html.push('<li>', start, ' ', title, '</li>');
+    }
+
+    html.push('</ul>');
+    document.getElementById("agenda").innerHTML = html.join("");
+  }
 </script>
 </html>
