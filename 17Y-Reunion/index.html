@@ -2,16 +2,41 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>逢甲土木17Y Reunion</title>
+<title>Civil 17Y Reunion</title>
 <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 <meta name="viewport" content="width=device-width" />
 <link rel="stylesheet" type="text/css" href="../Public/js/vendor/semantic-ui/dist/semantic.css" />
 </head>
 <body>
-
-<h1 class=""><i class="ui home icon"></i>邀請函</h1>
+<style type="text/css">
+#main { margin:0 20px; }
+.left,.right { width:48%; margin:0 10px; border-right:solid 2px #bbb;  }
+.left { float:left; padding:10px; color:#555; font-size:17px; }
+.right { float:right; }
+#members { overflow:auto; max-height:600px; }
+</style>
+<h2 class=""><i class="ui home icon"></i>逢甲86級土木同學會邀請函</h2>
 <div id="msg"></div>
-<div id="agenda"></div>
+
+<div id="main">
+<div class="left">
+
+各位親愛的同學們：
+
+我們將於103年12月28日舉辦大學同學會，請大家務必共襄盛舉！
+<ul>
+<li>時間：11:30報到、12:00開席</li>
+<li>地點：咕咕香甕缸雞 (台中市西屯區西屯路三段89號之二，有停車場)</li>
+<li>費用：參加每位大人將預收1,000元(孩童不收費)，剩餘或不足費用之處理方式將於當天另行討論。</li>
+<li>若人數有異動，請於12/20前通知貴麒或育政更正，屆時以此份資料為準，謝謝!!</li>
+</ul>
+
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1819.8256719259566!2d120.62737741290462!3d24.183957479831246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3469160447143beb%3A0xe7e632d775d9cddc!2sNo.+89-2%2C+Section+3%2C+Xitun+Rd%2C+Xitun+District%2C+Taichung+City%2C+407!5e0!3m2!1sen!2stw!4v1418725211583" width="100%" height="400" frameborder="0" style="border:0"></iframe>
+</div>
+<div class="right" id="members"></div>
+
+</div>
+
 </body>
 
 <script type="text/javascript" src="../Public/js/vendor/jquery/jquery.min.js"></script>
@@ -19,25 +44,28 @@
 
 <script type="text/javascript">
 $(function(){
-    $("#msg").html("test....");
+    $("#msg").html("");
 });
 
 function JSN(root) {
     var feed = root.feed;
     var entries = feed.entry || [];
-    var html = ['<ul>'];
-
+    var html = ['<table class="ui blue table">'];
+    html.push('<tr><td>', title, '</td><td>', adult, '</td><td>', kids, '</td><td>0', tel, '</td><td class="six wide">', note, '</td></tr>');
     for (var i = 0; i < entries.length; ++i) {
       var entry = entries[i];
-      var title = (entry.title.type == 'html') ? entry.title.$t : escape(entry.title.$t);
-      var start = (entry['gd$when']) ? entry['gd$when'][0].startTime : "";	
-
-      html.push('<li>', start, ' ', title, '</li>');
+      var title = (entry.title.type == 'text') ? entry.title.$t : escape(entry.title.$t);
+      var adult = (entry['gsx$adult']) ? entry['gsx$adult'].$t : "";
+      var kids = (entry['gsx$kids']) ? entry['gsx$kids'].$t : "";
+      var tel = (entry['gsx$tel']) ? entry['gsx$tel'].$t : "";
+      var note = (entry['gsx$note']) ? entry['gsx$note'].$t : "";
+      //var content = (entry.content.type == "text") ? entry.content.$t : escape(entry.title.$t);
+      html.push('<tr><td>', title , '</td><td>', adult, '</td><td>', kids ,'</td><td>0', tel ,'</td><td>', note ,'</td></tr>');
     }
 
-    html.push('</ul>');
-    document.getElementById("agenda").innerHTML = html.join("");
+    html.push('</table>');
+    $("#members").html(html.join(""));
   }
 </script>
-<script type="text/javascript" src="https://spreadsheets.google.com/feeds/list/1qoMoqsqgnOgwE2mFSMQ2B89o8sKhKO5BhQ4h_QNUx8c/od6/public/values?alt=json-in-script&callback=JSN"></script>
+<script type="text/javascript" src="https://spreadsheets.google.com/feeds/list/1qoMoqsqgnOgwE2mFSMQ2B89o8sKhKO5BhQ4h_QNUx8c/od6/public/values?alt=json-in-script&callback=JSN"></script>
 </html>
