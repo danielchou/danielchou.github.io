@@ -28,7 +28,6 @@
 <li>時間：11:30報到、12:00開席</li>
 <li>地點：咕咕香甕缸雞 (台中市西屯區西屯路三段89號之二，有停車場)</li>
 <li>費用：參加每位大人將預收1,000元(孩童不收費)，剩餘或不足費用之處理方式將於當天另行討論。</li>
-<li>若人數有異動，請於12/20前通知貴麒或育政更正，屆時以此份資料為準，謝謝!!</li>
 </ul>
 
 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1819.8256719259566!2d120.62737741290462!3d24.183957479831246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3469160447143beb%3A0xe7e632d775d9cddc!2sNo.+89-2%2C+Section+3%2C+Xitun+Rd%2C+Xitun+District%2C+Taichung+City%2C+407!5e0!3m2!1sen!2stw!4v1418725211583" width="100%" height="400" frameborder="0" style="border:0"></iframe>
@@ -48,24 +47,23 @@ $(function(){
 });
 
 function JSN(root) {
-    var feed = root.feed;
-    var entries = feed.entry || [];
-    var html = ['<table class="ui blue table">'];
-    html.push('<tr><td>', title, '</td><td>', adult, '</td><td>', kids, '</td><td>0', tel, '</td><td class="six wide">', note, '</td></tr>');
+    var feed = root.feed,
+		entries = feed.entry || [],
+		html = ['<table class="ui blue table">'],
+		entry,who,adult,kid1,kid2,note;
+	html.push('<tr><td>姓名</td><td>大人</td><td>小孩佔位</td><td>小孩不佔位</td></tr>');
     for (var i = 0; i < entries.length; ++i) {
-      var entry = entries[i];
-      var title = (entry.title.type == 'text') ? entry.title.$t : escape(entry.title.$t);
-      var adult = (entry['gsx$adult']) ? entry['gsx$adult'].$t : "";
-      var kids = (entry['gsx$kids']) ? entry['gsx$kids'].$t : "";
-      var tel = '000-000-000';//(entry['gsx$tel']) ? entry['gsx$tel'].$t : "";
-      var note = (entry['gsx$note']) ? entry['gsx$note'].$t : "";
-      //var content = (entry.content.type == "text") ? entry.content.$t : escape(entry.title.$t);
-      html.push('<tr><td>', title , '</td><td>', adult, '</td><td>', kids ,'</td><td>0', tel ,'</td><td>', note ,'</td></tr>');
+      entry = entries[i];
+      who = (entry['gsx$我是誰']) ? entry['gsx$我是誰'].$t : "";
+	  adult = (entry['gsx$人數統計大人包含自己']) ? entry['gsx$人數統計大人包含自己'].$t : "";
+      kid1 = (entry['gsx$人數統計孩童佔位']) ? entry['gsx$人數統計孩童佔位'].$t : "";
+      kid2 = (entry['gsx$人數統計孩童不佔位2歲以下']) ? entry['gsx$人數統計孩童不佔位2歲以下'].$t : "";
+      html.push('<tr><td>', who , '</td><td>', adult, '</td><td>', kid1 ,'</td><td>0', kid2 ,'</td><td>', note ,'</td></tr>');
     }
 
     html.push('</table>');
     $("#members").html(html.join(""));
   }
 </script>
-<script type="text/javascript" src="https://spreadsheets.google.com/feeds/list/1qoMoqsqgnOgwE2mFSMQ2B89o8sKhKO5BhQ4h_QNUx8c/od6/public/values?alt=json-in-script&callback=JSN"></script>
+<script type="text/javascript" src="https://spreadsheets.google.com/feeds/list/1tzFZ07GhEQophPO0YGL0Jd3Asn3pzV9Ej6Pg4drl800/default/public/values?alt=json-in-script&callback=JSN"></script>
 </html>
