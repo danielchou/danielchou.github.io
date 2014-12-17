@@ -57,7 +57,7 @@ function JSN(root) {
       var title = (entry.title.type == 'text') ? entry.title.$t : escape(entry.title.$t);
       var adult = (entry['gsx$adult']) ? entry['gsx$adult'].$t : "";
       var kids = (entry['gsx$kids']) ? entry['gsx$kids'].$t : "";
-      var tel = (entry['gsx$tel']) ? entry['gsx$tel'].$t : "";
+      var tel = '000-000-000';//(entry['gsx$tel']) ? entry['gsx$tel'].$t : "";
       var note = (entry['gsx$note']) ? entry['gsx$note'].$t : "";
       //var content = (entry.content.type == "text") ? entry.content.$t : escape(entry.title.$t);
       html.push('<tr><td>', title , '</td><td>', adult, '</td><td>', kids ,'</td><td>0', tel ,'</td><td>', note ,'</td></tr>');
