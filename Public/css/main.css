@@ -1,0 +1,9 @@
+﻿#main { margin:10px auto; width:90%; font-family:proxima-nova,helvetica,sans-serif; } 
+.left,.right { width:48%; }
+.left { float:left; color:#666; font-size:17px; } 
+.right { float:right; }
+.red,red { color:#000; font-weight:bolder; } 
+#members { overflow:auto; max-height:600px; } 
+li { margin:4px 0;} 
+.ui.header.gray { color:#666; } 
+.ui.header.h2h { text-align:center; background-color:#f7f7f7; line-height:4em; position:relative; z-index:999; } 

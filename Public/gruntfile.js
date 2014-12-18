@@ -12,11 +12,21 @@ module.exports = function (grunt) {
             },
             my_target: {
                 files: {
-                    "dest/aa.js":[
+                    "dest/aa.js": [
                         "js/vendor/jquery/jquery.js",
                         "js/vendor/semantic-ui/semantic.js",
                         "js/views/m1.js"
                     ]
+                }
+            }
+        },
+        cssmin: {
+            combine: {
+                options:{
+                    banner:"/* My minified css file!! By Daniel.Chou */"
+                },
+                files: {
+                    "css/dest/m.css":["css/main.css"]
                 }
             }
         }
@@ -25,8 +35,9 @@ module.exports = function (grunt) {
 
     // Load the plugin that provides the "uglify" task.
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
 
     // Default task(s).
-    grunt.registerTask('default', ['uglify']);
+    grunt.registerTask('default', ['uglify',"cssmin"]);
 
 };
