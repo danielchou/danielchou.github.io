@@ -22,22 +22,36 @@ module.exports = function (grunt) {
         },
         cssmin: {
             combine: {
-                options:{
-                    banner:"/* My minified css file!! By Daniel.Chou */"
+                options: {
+                    banner: "/* My minified css file!! By Daniel.Chou */"
                 },
                 files: {
-                    "css/dest/m.css":["css/main.css"]
+                    "css/dest/m.css": ["css/main.css"]
+                }
+            }
+        },
+        htmlmin: {
+            dist: {
+                options: {
+                    removeComments: true,
+                    collapesWhitespace: true
+                },
+                files: {
+                    "../17Y-Reunion/src/index.html":"../17Y-Reunion/index.html"
                 }
             }
         }
 
+
     });
 
     // Load the plugin that provides the "uglify" task.
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-htmlmin');
 
     // Default task(s).
-    grunt.registerTask('default', ['uglify',"cssmin"]);
+    grunt.registerTask('default', ["copy",'uglify', "cssmin", "htmlmin"]);
 
 };
