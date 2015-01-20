@@ -10,7 +10,7 @@
 	  adult = (entry['gsx$人數統計大人包含自己']) ? entry['gsx$人數統計大人包含自己'].$t : "";
       kid1 = (entry['gsx$人數統計孩童佔位']) ? entry['gsx$人數統計孩童佔位'].$t : "";
       kid2 = (entry['gsx$人數統計孩童不佔位2歲以下']) ? entry['gsx$人數統計孩童不佔位2歲以下'].$t : "";
-      kid1 = (kid1 == "") ? "--" : kid1;
+      kid1 = (kid1 === "") ? "--" : kid1;
       html.push('<tr><td>', who , '</td><td>', adult, '</td><td>', kid1 ,'</td><td>0', kid2 ,'</td><td>', note ,'</td></tr>');
     }
 

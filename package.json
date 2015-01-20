@@ -1,0 +1,31 @@
+{
+  "name": "danielchou.github.io",
+  "version": "0.0.0",
+  "description": "danielchou.github.io ====================",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp": "~3.8.10"
+  },
+  "devDependencies": {
+    "gulp": "~3.8.10",
+    "gulp-livereload": "~3.4.0",
+    "gulp-connect": "~2.2.0",
+    "gulp-load-plugins": "~0.8.0",
+    "gulp-jshint": "~1.9.0",
+    "gulp-uglify": "~1.1.0",
+    "gulp-concat": "~2.4.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/danielchou/danielchou.github.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danielchou/danielchou.github.io/issues"
+  },
+  "homepage": "https://github.com/danielchou/danielchou.github.io"
+}
