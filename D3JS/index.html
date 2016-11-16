@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="script/c3/c3.min.css" rel="stylesheet" type="text/css">
+    <meta charset="utf-8">
+  </head>
+<body>
+
+<style>
+.module-triangle-bottom { position: absolute; top:10px; left:10px; z-index:999; background-color:#333; color:#eee; padding:5px; font-size:11px; width:120px; }
+#newspanel { display:block; margin:10px auto; width: 600px; border:solid 1px #ddd; padding:3px;}
+#headline { background-color:#444; color:#fff; font-size:15px; text-align:left; padding:5px 20px; }
+#content { background-color:#eff; color:#666; font-size:13px; text-align:left; padding:10px 20px; line-height:18px; }
+</style>
+
+<h2>宏達電股價-2015年，每日收盤價、重大新聞時間軸呈現</h2>
+<p>請滾動滑鼠滑輪Zoom in or out, 或拖拉線圖調整可視區。</p>
+<div id="chart">Loading...</div>
+<div id="newspanel"><div id="headline"></div><div id="content"></div></div>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="script/d3.v3.min.js"></script>
+<script src="script/c3/c3.min.js"></script>
+<script type="text/javascript">
+
+var dtArr,closeArr,news;
+$.ajax({
+    url: 'htc_news.json',
+    success: function (rs) {
+      news=rs.news;
+    }
+});
+
+$.ajax({
+    url: 'HTC_2015.json',
+    success: function (rs) {
+      dtArr=['x'], closeArr=['close'], quote=rs.quote;
+      var k =0, c;
+      for(var d in quote){
+            c = quote[d];
+            dtArr.push(c.Date);
+            closeArr.push(parseFloat(c.Close));
+      }
+      //console.log(dtArr, closeArr);
+      var chart = c3.generate({
+            data: {
+                x:"x",
+                columns: [ dtArr, closeArr],
+                onclick: function(d,el){ },
+                onmouseover:function(d){ }
+            },
+            axis: {
+                x: {
+                    type: 'timeseries',
+                    tick: { format: '%Y-%m-%d' }
+                }
+            },
+            zoom: { enabled: true },
+            tooltip: {
+                grouped: false,
+                position: function (data, width, height, element) {
+                    var chartOffsetX = document.querySelector("#chart").getBoundingClientRect().left;
+                    var graphOffsetX = document.querySelector("#chart g.c3-axis-y").getBoundingClientRect().right;
+                    var tooltipWidth = document.getElementById('tooltip').parentNode.clientWidth;
+                    var x = (parseInt(element.getAttribute('cx')) ) + graphOffsetX - chartOffsetX - Math.floor(tooltipWidth/2);
+                    var y = element.getAttribute('cy');
+                    var y = y - height - 14;
+                    return {top: y, left: x}
+                },
+                contents: function (d, defaultTitleFormat, defaultValueFormat, color) {
+                    var dd=d[0].index, st = quote[dd], x=d[0].x, xdt=formatDate(x); 
+                    var nn=news.filter(function(ns){ return ns.datetime_local===xdt; });
+                    var nt = (nn[0]===undefined)? {headline: "", content:""} : nn[0];
+                    //console.log(x, xdt, nt); 
+                    $("#headline").html(nt.headline);
+                    $("#content").hide().html(nt.content).fadeIn("fast");
+                    var arr=['<div id="tooltip" class="module-triangle-bottom">',"Open:",st.Open,"<br />High: " ,st.High,"<br />Low: ",st.Low ,"<br />Volume: ", st.Volume ,'</div>'];
+                    return arr.join("");
+                }
+            }
+        });
+
+        
+    },
+    error: function (err) {
+      console.log('Error', err);
+    }
+  });
+
+function formatDate(date) {
+  var mm=parseInt(date.getMonth())+1;
+  return  date.getFullYear()+"/"+ mm + "/" + date.getDate();
+}
+
+</script>
+</body>
+</html>
