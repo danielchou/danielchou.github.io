@@ -7,6 +7,7 @@ site_dir: site
 nav:
   - 首頁: index.md
   - 關於我: aboutme.md
+  - 作品集: portfolio.md
 
 theme:
   name: material
@@ -29,6 +30,3 @@ theme:
     - navigation.top
     - toc.follow
     - toc.integrate
-  hide:
-    # - navigation
-    # - toc
