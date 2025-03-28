@@ -1,5 +1,5 @@
 site_name: DanielChou的異想世界
-# site_url: https://mydomain.org/mysite
+site_url: https://danielchou.github.io
 use_directory_urls: true
 docs_dir: docs
 site_dir: site
