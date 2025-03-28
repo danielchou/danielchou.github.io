@@ -2,7 +2,7 @@ site_name: DanielChou的異想世界
 site_url: https://danielchou.github.io
 use_directory_urls: true
 docs_dir: docs
-site_dir: docs
+site_dir: public
 remote_branch: master
 
 nav:
