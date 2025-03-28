@@ -46,7 +46,7 @@
 - Azure Synapse Analytics
 - Power BI 整合
 
-### (2023)智能客服對話系統
+### 智能客服對話系統 (2023)
 
 ![智能客服](assets/images/chatbot.png)
 
@@ -68,7 +68,7 @@
 - Azure OpenAI Service
 - Elasticsearch
 
-### (2022)企業資源規劃系統重構
+### 企業資源規劃系統重構 (2022)
 
 ![ERP系統](assets/images/erp.png)
 
