@@ -3,7 +3,7 @@ site_url: https://danielchou.github.io
 use_directory_urls: true
 docs_dir: docs
 site_dir: site
-remote_branch: gh-pages
+remote_branch: master  # 部署到 master 分支
 
 nav:
   - 首頁: index.md
